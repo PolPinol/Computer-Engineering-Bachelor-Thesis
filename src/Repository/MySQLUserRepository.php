@@ -46,7 +46,7 @@ final class MySQLUserRepository implements UserRepository {
         $statement = $this->database->connection()->prepare($query);
 
         $email = $user->email();
-        $password = $user->password();
+        $password = password_hash($user->password(), PASSWORD_BCRYPT);
 
         $statement->bindParam('id', $id, PDO::PARAM_STR);
         $statement->bindParam('email', $email, PDO::PARAM_STR);
@@ -59,7 +59,7 @@ final class MySQLUserRepository implements UserRepository {
 
     public function getUser(int $id) {
         $query = <<<'QUERY'
-        SELECT * FROM user WHERE id = :id
+        SELECT id, email FROM user WHERE id = :id
         QUERY;
 
         $statement = $this->database->connection()->prepare($query);
@@ -74,7 +74,7 @@ final class MySQLUserRepository implements UserRepository {
 
     public function getUsers(): array {
         $query = <<<'QUERY'
-        SELECT * FROM user
+        SELECT id, email FROM user
         QUERY;
 
         $statement = $this->database->connection()->prepare($query);
@@ -96,7 +96,7 @@ final class MySQLUserRepository implements UserRepository {
         return $rows == 1;
     }
 
-    public function getAuthToken(int $id): string {
+    public function getAuthTokenWithId(int $id): string {
         $query = <<<'QUERY'
         SELECT token FROM user WHERE id = :id
         QUERY;
@@ -107,6 +107,27 @@ final class MySQLUserRepository implements UserRepository {
 
         if ($statement->rowCount() > 0) {
             return $statement->fetch(PDO::FETCH_OBJ)->token;
+        }
+        return "ERROR";
+    }
+
+    public function getAuthTokenWithEmail(User $user): string {
+        $query = <<<'QUERY'
+        SELECT token, password FROM user WHERE email = :email
+        QUERY;
+
+        $email = $user->email();
+
+        $statement = $this->database->connection()->prepare($query);
+        $statement->bindParam('email', $email, PDO::PARAM_STR);
+        $statement->execute();
+
+        if ($statement->rowCount() > 0) {
+            $userWithEmail = $statement->fetch(PDO::FETCH_OBJ);
+            $password = $userWithEmail->password;
+            if (password_verify($user->password(), $password)) {
+                return $userWithEmail->token;
+            }
         }
         return "ERROR";
     }

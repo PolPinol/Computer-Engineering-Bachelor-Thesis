@@ -54,7 +54,7 @@ final class APIController {
         } else {
             $user = new User($parameters->email, $parameters->password);
             $id = $this->userRepository->createUser($user);
-            $token = $this->userRepository->getAuthToken($id);
+            $token = $this->userRepository->getAuthTokenWithId($id);
 
             $message = array('token'    => $token);
             $statusCode = 201;
@@ -105,6 +105,33 @@ final class APIController {
         } else {
             $statusCode = 404;
             $message = array("message" => "User entry with id $id does not exist.");
+        }
+
+        $response->getBody()->write(json_encode($message,JSON_UNESCAPED_SLASHES));
+
+        return $response
+            ->withHeader('content-type', 'application/json')
+            ->withStatus($statusCode);
+    }
+
+    public function authUser(Request $request, Response $response, $args): Response {
+        $data = (string) $request->getBody();
+        $parameters = json_decode($data);
+
+        if (!isset($parameters->email) || !isset($parameters->password)) {
+            $statusCode = 400;
+            $message = array("message" => "'email' and/or 'password' key missing.");
+        } else {
+            $user = new User($parameters->email, $parameters->password);
+            $token = $this->userRepository->getAuthTokenWithEmail($user);
+
+            if ($token != "ERROR") {
+                $statusCode = 200;
+                $message = array("token" => $token);
+            } else {
+                $statusCode = 404;
+                $message = array("message" => "Your email and/or password are incorrect.");
+            }
         }
 
         $response->getBody()->write(json_encode($message,JSON_UNESCAPED_SLASHES));
