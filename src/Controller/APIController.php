@@ -16,7 +16,7 @@ final class APIController {
 
     public function getUsers(Request $request, Response $response, $args): Response {
         $statusCode = 200;
-        $message = json_encode($this->userRepository->getUsers());
+        $message = $this->userRepository->getUsers();
 
         $response->getBody()->write(json_encode($message,JSON_UNESCAPED_SLASHES));
 
@@ -53,9 +53,10 @@ final class APIController {
             $message = array("message" => "'email' and/or 'password' key missing.");
         } else {
             $user = new User($parameters->email, $parameters->password);
-            $message = array('id'       => (int) $this->userRepository->createUser($user),
-                             'email'    => $parameters->email,
-                             'password' => $parameters->password);
+            $id = $this->userRepository->createUser($user);
+            $token = $this->userRepository->getAuthToken($id);
+
+            $message = array('token'    => $token);
             $statusCode = 201;
         }
 
@@ -76,9 +77,9 @@ final class APIController {
             $message = array("message" => "'email' and/or 'password' key missing.");
         } else {
             $user = new User($parameters->email, $parameters->password);
-            $rows = $this->userRepository->updateUser((int) $id, $user);
+            $validate = $this->userRepository->updateUser((int) $id, $user);
 
-            if ($rows == 1) {
+            if ($validate == 1) {
                 $statusCode = 200;
                 $message = array("message" => "User entry with id $id was successfully updated.");
             } else {
@@ -96,9 +97,9 @@ final class APIController {
 
     public function deleteUser(Request $request, Response $response, $args): Response {
         $id = implode("|", $args);
-        $rows = $this->userRepository->deleteUser((int) $id);
+        $validate = $this->userRepository->deleteUser((int) $id);
 
-        if ($rows == 1) {
+        if ($validate == 1) {
             $statusCode = 200;
             $message = array("message" => "User entry with id $id was successfully deleted.");
         } else {

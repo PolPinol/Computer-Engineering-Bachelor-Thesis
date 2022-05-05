@@ -12,4 +12,5 @@ interface UserRepository {
     public function getUser(int $id);
     public function getUsers(): array;
     public function deleteUser(int $id): bool;
+    public function getAuthToken(int $id): string;
 }

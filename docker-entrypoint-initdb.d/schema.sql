@@ -12,5 +12,6 @@ CREATE TABLE `user`
     `id`         INT                                                     NOT NULL AUTO_INCREMENT,
     `email`      VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
     `password`   VARCHAR(255)                                            NOT NULL,
+    `token`      VARCHAR(255)                                            NOT NULL,
     PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
