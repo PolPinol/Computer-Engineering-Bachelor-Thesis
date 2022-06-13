@@ -17,7 +17,7 @@ DROP TABLE IF EXISTS `fight`;
 CREATE TABLE `fight`
 (
     `date`                  DATE            NOT NULL,
-    `quantity_attacker`     TEXT            NOT NULL,
+    `quantity_attacker`     INT            NOT NULL,
     `battle_id`             INT             NOT NULL,
     `habitant_id`           INT             NOT NULL,
     `land_id`               INT             NOT NULL,
@@ -32,11 +32,11 @@ CREATE TABLE `habitant`
 (
     `habitant_id`           INT             NOT NULL AUTO_INCREMENT,
     `attacker_damage`       INT             NOT NULL,
-    `defender_damage`      TEXT             NOT NULL,
+    `defender_damage`       INT             NOT NULL,
     `attacker_speed`        INT             NOT NULL,
-    `defender_speed`       INT              NOT NULL,
+    `defender_speed`        INT             NOT NULL,
     `velocity`              INT             NOT NULL,
-    `type`                  INT             NOT NULL,
+    `type`                  VARCHAR(255)             NOT NULL,
     PRIMARY KEY (`habitant_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -277,6 +277,11 @@ VALUES ('Wood', 10),
        ('Wheat', 10),
        ('Stone', 10),
        ('Iron', 10);
+
+INSERT INTO habitant(ATTACKER_DAMAGE, DEFENDER_DAMAGE, ATTACKER_SPEED, DEFENDER_SPEED, VELOCITY, TYPE)
+VALUES (10, 10, 1, 1, 10, 'Knight'),
+       (0, 10, 1, 1, 10, 'Defender'),
+       (10, 0, 1, 1, 10, 'Attacker');
 
 INSERT INTO upgrade(UPGRADE_ID, LEVEL)
 VALUES (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6), (7, 7), (8, 8), (9, 9), (10, 10),
