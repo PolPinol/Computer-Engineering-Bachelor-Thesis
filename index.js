@@ -1,5 +1,7 @@
 const express = require('express');
 const app = express();
+const serveStatic = require('serve-static');
+const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
@@ -14,6 +16,8 @@ data.startServer();
 
 // Routes
 app.use(require('./routes/routes'));
+
+app.use('/', serveStatic(path.join(__dirname, '/dist')));
 
 // Listen port
 app.listen(app.get('port'),()=>{
