@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "prestart": "(rmdir dist /s /q) & cd frontend && npm run build && cd .. && move ./frontend/dist ./dist",
     "start": "(cd backend && del gameMaster.json && copy gameMaster_real.json gameMaster.json) & cd .. && nodemon index.js",
-    "build": "(rmdir dist /s /q) & cd frontend && npm run build && cd .. && move ./frontend/dist ./dist",
     "preinstall": "cd frontend && npm install && pip install locust",
-    "test": "(cd backend && del gameMaster.json && copy gameMaster_test.json gameMaster.json) & cd .. && cd testing && locust"
+    "pretest": "cd backend && del gameMaster.json && copy gameMaster_test.json gameMaster.json",
+    "test": "cd testing && locust"
   },
   "keywords": [],
   "author": "Pol Piñol Castuera",
