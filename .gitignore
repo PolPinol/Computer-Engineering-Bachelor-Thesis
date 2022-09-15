@@ -4,3 +4,6 @@ package-lock.json
 frontend/package-lock.json
 /dist
 .idea
+testing/.idea
+/testing/venv
+/testing/venv/

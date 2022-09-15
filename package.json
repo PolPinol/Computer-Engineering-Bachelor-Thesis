@@ -4,12 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
-    "clean": "rmdir dist /s /q",
-    "build": "cd frontend && npm run build && cd .. && move ./frontend/dist ./dist"
+    "start": "(cd backend && del gameMaster.json && copy gameMaster_real.json gameMaster.json) & cd .. && nodemon index.js",
+    "build": "(rmdir dist /s /q) & cd frontend && npm run build && cd .. && move ./frontend/dist ./dist",
+    "preinstall": "cd frontend && npm install && pip install locust",
+    "test": "(cd backend && del gameMaster.json && copy gameMaster_test.json gameMaster.json) & cd .. && cd testing && locust"
   },
   "keywords": [],
-  "author": "",
+  "author": "Pol Piñol Castuera",
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^2.0.19"
