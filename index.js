@@ -11,12 +11,13 @@ app.set('port', process.env.PORT || 5000);
 app.set('json spaces', 2);
 
 // Fetch data from gamemaster
-const data = require('./data/data');
+const data = require('./backend/data/data');
 data.startServer();
 
-// Routes
-app.use(require('./routes/routes'));
+// Backend API Routes
+app.use(require('./backend/routes/routes'));
 
+// Frontend
 app.use('/', serveStatic(path.join(__dirname, '/dist')));
 
 // Listen port
