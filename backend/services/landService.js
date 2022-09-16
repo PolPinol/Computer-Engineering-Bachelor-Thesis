@@ -54,8 +54,9 @@ const createLand = async () => {
     );
 
     // Select a random type of land with different resources on it
-    const randomLand = Math.floor(Math.random() * 6);
-    const landData = data.getLandsInfo().type[randomLand];
+    const lands = data.getLandsInfo();
+    const randomLand = Math.floor(Math.random() * lands.type.length);
+    const landData = lands.type[randomLand];
     const landType = landData.typeId;
     let it = 1;
     const resourcesFields = [];

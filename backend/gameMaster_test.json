@@ -1,4 +1,112 @@
 {
+    "lands": {
+        "type": [
+            {
+                "typeId": "LAND_TYPE_1",
+                "resources": ["RESOURCE_WHEAT", "RESOURCE_WHEAT", "RESOURCE_STONE",
+                    "RESOURCE_WOOD", "RESOURCE_WOOD", "RESOURCE_IRON", "RESOURCE_WHEAT",
+                    "RESOURCE_STONE", "RESOURCE_WHEAT", "RESOURCE_WHEAT", "RESOURCE_IRON",
+                    "RESOURCE_WHEAT", "RESOURCE_WOOD", "RESOURCE_WHEAT", "RESOURCE_IRON",
+                    "RESOURCE_WHEAT", "RESOURCE_WHEAT", "RESOURCE_STONE"],
+                "src": "/../assets/lands/map1.png"
+            }
+        ],
+        "resources": [
+            {
+                "type": "RESOURCE_WOOD",
+                "quantity":  1000000
+            },
+            {
+                "type": "RESOURCE_WHEAT",
+                "quantity":  1000000
+            },
+            {
+                "type": "RESOURCE_STONE",
+                "quantity":  1000000
+            },
+            {
+                "type": "RESOURCE_IRON",
+                "quantity":  1000000
+            }
+        ]
+    },
+    "adventures": [
+        {
+            "name": "Boats and Bazaars",
+            "difficulty": 1,
+            "attack": 100,
+            "life": 500,
+            "time": 120,
+            "resources": [
+                {
+                    "type": "RESOURCE_WOOD",
+                    "quantity":  10000
+                },
+                {
+                    "type": "RESOURCE_WHEAT",
+                    "quantity":  10000
+                },
+                {
+                    "type": "RESOURCE_STONE",
+                    "quantity":  10000
+                },
+                {
+                    "type": "RESOURCE_IRON",
+                    "quantity":  10000
+                }
+            ]
+        },
+        {
+            "name": "Dive in the Red Sea",
+            "difficulty": 2,
+            "attack": 1000,
+            "life": 10000,
+            "time": 300,
+            "resources": [
+                {
+                    "type": "RESOURCE_WOOD",
+                    "quantity":  250000
+                },
+                {
+                    "type": "RESOURCE_WHEAT",
+                    "quantity":  250000
+                },
+                {
+                    "type": "RESOURCE_STONE",
+                    "quantity":  250000
+                },
+                {
+                    "type": "RESOURCE_IRON",
+                    "quantity":  250000
+                }
+            ]
+        },
+        {
+            "name": "Cruise the Nile to Aswan",
+            "difficulty": 3,
+            "attack": 10000,
+            "life": 5000000,
+            "time": 600,
+            "resources": [
+                {
+                    "type": "RESOURCE_WOOD",
+                    "quantity":  5000000
+                },
+                {
+                    "type": "RESOURCE_WHEAT",
+                    "quantity":  5000000
+                },
+                {
+                    "type": "RESOURCE_STONE",
+                    "quantity":  5000000
+                },
+                {
+                    "type": "RESOURCE_IRON",
+                    "quantity":  5000000
+                }
+            ]
+        }
+    ],
     "resources": [
         {
             "resourceId": "RESOURCE_WOOD",
@@ -716,11 +824,29 @@
         {
             "troopId": "TROOP_SLAVE",
             "name": "Slave",
-            "src": "./assets/troops/troop1.png",
+            "src": "../assets/troops/troop1.png",
             "attackDamage": 1,
             "defenderDamage": 1,
             "life": 20,
-            "mobility": 1
+            "mobility": 1,
+            "resources": [
+                {
+                    "type": "RESOURCE_WOOD",
+                    "quantity":  1
+                },
+                {
+                    "type": "RESOURCE_WHEAT",
+                    "quantity":  1
+                },
+                {
+                    "type": "RESOURCE_STONE",
+                    "quantity":  1
+                },
+                {
+                    "type": "RESOURCE_IRON",
+                    "quantity":  1
+                }
+            ]
         }
     ],
     "buildings": [
@@ -795,6 +921,40 @@
                         }
                     ],
                     "time": 120
+                }
+            ]
+        },
+        {
+            "buildingId": "BUILDING_SLAVE_DORMITORIES",
+            "name": "Slave dormitories",
+            "description": "Building that allows you to create new troops (slaves).",
+            "src": "../assets/buildings/build9.png",
+            "action": {
+                "type": "TROOP",
+                "troopId": "TROOP_SLAVE"
+            },
+            "upgrades": [
+                {
+                    "level": 1,
+                    "resources": [
+                        {
+                            "type": "RESOURCE_WOOD",
+                            "quantity":  50
+                        },
+                        {
+                            "type": "RESOURCE_WHEAT",
+                            "quantity":  50
+                        },
+                        {
+                            "type": "RESOURCE_STONE",
+                            "quantity":  50
+                        },
+                        {
+                            "type": "RESOURCE_IRON",
+                            "quantity":  50
+                        }
+                    ],
+                    "time": 30
                 }
             ]
         }
