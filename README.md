@@ -1,26 +1,108 @@
-# TFG
-The main objective of this project is to reproduce a real-time strategy multiplayer video game with its own theme and different from the popular ones, solving the loading and slowness problems that these types of video games have due to the continuous calls to the database .
+<h1 align="center">
+  <br>
+  <a href=""><img src="https://i.imgur.com/xwWKLXe.png" alt="Markdownify" width="200"></a>
+  <br>
+  Age of Ra
+  <br>
+</h1>
 
-During the development of the video game, Clean Code techniques and patterns will be applied, using from the start an optimal design, software patterns and complete documentation of the code and tools used.
+<h4 align="center">Real-time Strategy Multiplayer Video Game with an egiptian thematic.</h4>
 
-Finally, we want the video game, and its servers, to be fully functional from the day they open to the public. The goal would be that even if a person was playing on a server completely alone, the experience would be similar to playing with people.
+<p align="center">
+  <a href="#versions">Versions</a> •
+  <a href="#how-to-use-locally">How To Use Locally</a> •
+  <a href="#testing">Testing</a> •
+  <a href="#website">Website</a>
+</p>
 
-Previous dependencies:
-```
-...
+![screenshot](https://i.imgur.com/YYb4ZGR.jpg)
+
+## Versions
+### v1.0
+* Add global Ranking page
+* Add Timeline page
+* Upgrade usability in all the buttons
+* Upgrade  all graphics and images
+* Deploy the application
+
+### v0.4
+* Implement source of truth and Vuejs Pinia
+* Implement new features
+    - Recruit troops
+    - Adventures
+    - Buy new lands
+* Add cookies to keel user logged in
+
+### v0.3
+* Testing upgrades buildings
+* Testing upgrades pyramid
+* Testing upgrades resources
+* GameMaster v2
+
+### v0.2
+* Testing sign up
+* Testing log in
+* Testing creation of the land
+* Implement upgrades buildings
+* Implement upgrades pyramid
+* Implement upgrades resources
+
+### v0.1
+* Implement basic gameMaster
+* Using MongoDB for all managament of the database
+* Creation of a basic land
+* Construct buildings
+* Creation of the pyramid
+* Automatically update resources
+* Sign up and log in implemented
+
+## How To Use Locally
+
+To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
+
+```bash
+# Clone this repository
+$ git clone https://github.com/amitmerchant1990/electron-markdownify
+
+# Go into the repository
+$ cd code
+
+# Install dependencies
+$ npm install
+
+# Run the app
+$ npm start
+
+# App will be run on http://localhost:5000
 ```
 
-Install dependencies:
-```
-npm install
-```
+> **Note**
+> All the scripts are prepared to be run using Windows.
 
-Run code in localhost
+## Testing
+```bash
+# Run this command with a specific test from the list
+$ npm test --tags=test_lands
 ```
-npm start
-```
+We have different tests to check all functionalities from the video game:
 
-Run tests
-```
-npm test
-```
+* test_login
+* test_signup
+* test_lands
+* test_upgrades
+* test_troops
+
+
+## Website
+
+You can play online on the website [Age of Ra](https://age-of-ra.herokuapp.com).
+
+
+> pol.pinolcastuera@gmail.com &nbsp;&middot;&nbsp;
+> GitHub [@PolPinol](https://github.com/polpinol) &nbsp;&middot;&nbsp;
+> Linkedin [Pol Piñol Castuera](https://www.linkedin.com/in/polpinol/)
+
+
+
+
+
