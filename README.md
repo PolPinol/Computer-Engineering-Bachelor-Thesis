@@ -64,9 +64,6 @@ To clone and run this application, you'll need [Git](https://git-scm.com) and [N
 # Clone this repository
 $ git clone https://github.com/PolPinol/Computer-Engineering-Bachelor-Thesis.git
 
-# Go into the repository
-$ cd code
-
 # Install dependencies
 $ npm install
 
