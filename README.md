@@ -77,11 +77,11 @@ $ npm install
 # Run the app
 $ npm start
 
-# App will be run on http://localhost:5000
+# App will be run on http://localhost:3000
 ```
 
 > **Note**
-> All the scripts are prepared to be run using Windows.
+> All the scripts are prepared to be run using macOS Ventura 13.1.
 
 ## Testing
 ```bash
@@ -98,8 +98,7 @@ We have different tests to check all functionalities from the video game:
 
 
 ## Website
-
-You can play online on the website [Age of Ra](https://age-of-ra.herokuapp.com).
+In the future, you will have the possibility of playing online.
 
 
 > pol.pinolcastuera@gmail.com &nbsp;&middot;&nbsp;
