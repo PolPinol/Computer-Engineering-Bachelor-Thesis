@@ -26,7 +26,7 @@ export default {
     return {
       gamemaster: gamemaster(),
       resourceInfo: undefined,
-      defaultSrc: []
+      defaultSrc: [],
     }
   },
   methods: {
@@ -101,7 +101,6 @@ a {
 }
 
 img {
-  margin-right: 1em;
   height: auto;
   width: auto;
   min-width: 40%;
@@ -111,7 +110,7 @@ img {
 }
 
 .columni {
-  display: flex;
+
 }
 
 p {

@@ -4,6 +4,7 @@
       <SignUpForm v-if="mode === 1"/>
       <LogInForm v-if="mode === 2"/>
       <GamePage v-if="mode === 3"/>
+      <AdminPanel v-if="mode === 4"/>
     </div>
 </template>
 
@@ -14,6 +15,7 @@ import HomeButtons from './components/HomePage.vue';
 import SignUpForm from "./components/SignUp/SignUpForm.vue";
 import LogInForm from "./components/LogIn/LogInForm.vue";
 import GamePage from "./components/Game/GamePage.vue";
+import AdminPanel from "./components/Admin/AdminPanel.vue";
 
 export default {
   name: 'App',
@@ -22,6 +24,7 @@ export default {
     SignUpForm,
     HomeButtons,
     GamePage,
+    AdminPanel,
   },
   data: function () {
     return {
@@ -46,6 +49,9 @@ export default {
     },
     accessGame() {
       this.mode = 3;
+    },
+    accessAdminPanel() {
+      this.mode = 4;
     }
   },
   async beforeMount() {

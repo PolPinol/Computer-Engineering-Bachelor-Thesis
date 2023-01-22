@@ -2,10 +2,10 @@
   <!-- ADVENTURE SELECTOR COMPONENT -->
   <div class="home">
     <div class="home2">
-      <div v-for="(ad, index) in this.adventures" class="adv" :key="ad.name">
+      <div v-for="ad in this.adventures" class="adv" :key="ad.name">
         <p class="fw-bold">{{ ad.name }} ({{ ad.difficulty }})</p>
         <p>Time: {{ new Date(ad.time * 1000).toISOString().substr(11, 8) }}</p>
-        <button class="button" @click="click(index)">Go</button>
+        <button class="button" @click="click(ad.name)">Go</button>
       </div>
     </div>
     <p class="error" v-if="this.message !== ''">{{ message }}</p>
@@ -31,8 +31,8 @@ export default {
     }
   },
   methods: {
-    async click(index) {
-      const check = await this.land.adventure(this.player.$state.authKey, index+1);
+    async click(name) {
+      const check = await this.land.adventure(this.player.$state.authKey, name);
 
       this.message = '';
       if (check === null) {

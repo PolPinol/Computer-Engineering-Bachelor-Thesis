@@ -49,10 +49,14 @@ export default {
   },
   methods: {
     async login() {
-      if (this.username.length >= 8 && this.username.length >= 8) {
+      if (this.password.length >= 8 && (this.username.length >= 8 || this.username === 'admin')) {
         const check = await this.player.authenticatePlayer(this.username, this.password);
         if (check === null) {
-          this.$parent.accessGame();
+          if (this.player.$state.admin) {
+            this.$parent.accessAdminPanel();
+          } else {
+            this.$parent.accessGame();
+          }
         } else {
           this.message = check;
         }

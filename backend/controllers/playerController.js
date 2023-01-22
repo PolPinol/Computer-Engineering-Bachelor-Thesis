@@ -10,7 +10,7 @@ const jwt = require("jsonwebtoken");
 const authenticatePlayer = async (req, res) => {
     if (typeof req.body.username === 'undefined' || typeof req.body.password === 'undefined') {
         return res.status(400).send({"error": "Fields 'username' and/or 'password' is missing."});
-    } else if (req.body.username.length < 8 || req.body.password.length < 8) {
+    } else if ((req.body.username.length < 8 && req.body.username !== "admin") || req.body.password.length < 8) {
         return res.status(400).send({"error": "Fields 'username' and/or 'password' are less than 8 characters / digits."});
     } else {
         const _id = await playerService.getAuthKey(req.body.username, req.body.password);
@@ -21,7 +21,7 @@ const authenticatePlayer = async (req, res) => {
                 "_id": _id
             }, "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9");
 
-            return res.status(200).send({"auth_key": authKey});
+            return res.status(200).send({"auth_key": authKey, "admin": req.body.username === "admin"});
         } else {
             return res.status(404).send({"error": "Your username and/or password are incorrect."});
         }

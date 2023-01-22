@@ -7,7 +7,7 @@ const cors = require('cors');
 
 app.use(bodyParser.json());
 app.use(cors());
-app.set('port', process.env.PORT || 5000);
+app.set('port', process.env.PORT || 3000);
 app.set('json spaces', 2);
 
 // Fetch data from gamemaster

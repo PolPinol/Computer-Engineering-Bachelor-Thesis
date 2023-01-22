@@ -5,6 +5,13 @@
 const playerService = require("../services/playerService");
 const landService = require("../services/landService");
 
+// Method that get the gamemaster data.
+const getGamemaster = async (req, res) => {
+    const gamemaster = await landService.getGamemaster();
+
+    return res.status(200).send(gamemaster);
+}
+
 // Method that get all identifiers from lands owned by the player.
 const getLands = async (req, res) => {
     const lands = await landService.getLands(req.player._id);
@@ -151,28 +158,24 @@ const recruitTroops = async (req, res) => {
 
 // Method that sends an adventure over the time.
 const adventure = async (req, res) => {
-    if (typeof req.body.landId === 'undefined' || typeof req.body.troops === 'undefined' || typeof req.body.difficulty === 'undefined') {
+    if (typeof req.body.landId === 'undefined' || typeof req.body.troops === 'undefined' || typeof req.body.name === 'undefined') {
         return res.status(400).send({"error": "Fields on body request are not correct / missing."})
     } else {
         if (!await playerService.isLandFromPlayer(req.player._id, req.body.landId)) {
             return res.status(404).send({"error": "This land is not owned by the player."});
         }
 
-        if (0 < req.body.difficulty && req.body.difficulty < 4) {
-            const land = await landService.getLandInfo(req.body.landId);
+        const land = await landService.getLandInfo(req.body.landId);
 
-            if (land !== null) {
-                const query = await landService.adventure(land, req.body.troops, req.body.difficulty);
-                if (query) {
-                    return res.status(200).send({"ok": 1});
-                } else {
-                    return res.status(404).send({"error": "Error at sending an adventure."});
-                }
+        if (land !== null) {
+            const query = await landService.adventure(land, req.body.troops, req.body.name);
+            if (query) {
+                return res.status(200).send({"ok": 1});
             } else {
-                return res.status(404).send({"error": "The land id is incorrect."});
+                return res.status(404).send({"error": "Error at sending an adventure."});
             }
         } else {
-            return res.status(404).send({"error": "The difficulty is incorrect."});
+            return res.status(404).send({"error": "The land id is incorrect."});
         }
     }
 }
@@ -202,6 +205,7 @@ const createLand = async (req, res) => {
 }
 
 module.exports = {
+    getGamemaster,
     getLands,
     getLandInfo,
     buildOrUpgrade,

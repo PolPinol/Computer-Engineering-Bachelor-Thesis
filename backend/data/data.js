@@ -35,6 +35,38 @@ const getLandsInfo = () => {
     return data.lands;
 }
 
+const getGamemaster = () => {
+    return data;
+}
+
+const addResource = (resource) => {
+    data.resources.push(resource);
+    const fs = require('fs');
+    fs.writeFileSync('./backend/gameMaster.json', JSON.stringify(data), 'utf8');
+    fs.writeFileSync('./backend/gameMaster_real.json', JSON.stringify(data), 'utf8');
+}
+
+const addBuilding = (building) => {
+    data.buildings.push(building);
+    const fs = require('fs');
+    fs.writeFileSync('./backend/gameMaster.json', JSON.stringify(data), 'utf8');
+    fs.writeFileSync('./backend/gameMaster_real.json', JSON.stringify(data), 'utf8');
+}
+
+const addTroop = (troop) => {
+    data.troops.push(troop);
+    const fs = require('fs');
+    fs.writeFileSync('./backend/gameMaster.json', JSON.stringify(data), 'utf8');
+    fs.writeFileSync('./backend/gameMaster_real.json', JSON.stringify(data), 'utf8');
+}
+
+const addAdventure = (adventure) => {
+    data.adventures.push(adventure);
+    const fs = require('fs');
+    fs.writeFileSync('./backend/gameMaster.json', JSON.stringify(data), 'utf8');
+    fs.writeFileSync('./backend/gameMaster_real.json', JSON.stringify(data), 'utf8');
+}
+
 module.exports = {
     startServer,
     getResources,
@@ -43,4 +75,9 @@ module.exports = {
     getTroops,
     getAdventures,
     getLandsInfo,
+    getGamemaster,
+    addResource,
+    addBuilding,
+    addTroop,
+    addAdventure,
 };

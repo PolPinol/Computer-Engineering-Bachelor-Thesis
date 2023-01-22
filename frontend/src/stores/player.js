@@ -7,7 +7,8 @@ export const player = defineStore("player", {
         authKey: undefined,
         lands: undefined,
         ranking: undefined,
-        position: undefined
+        position: undefined,
+        admin: undefined
     }),
     getters: {
 
@@ -16,7 +17,7 @@ export const player = defineStore("player", {
         async getPosition() {
             const configuration = {
                 method: 'GET',
-                url: 'http://localhost:5000/api/ranking',
+                url: 'http://localhost:3000/api/ranking',
                 headers: {
                     'Authorization': 'Bearer ' + this.authKey
                 }
@@ -30,7 +31,7 @@ export const player = defineStore("player", {
         async getRanking() {
             const configuration = {
                 method: 'GET',
-                url: 'http://localhost:5000/api/ranking/top',
+                url: 'http://localhost:3000/api/ranking/top',
                 headers: {
                     'Authorization': 'Bearer ' + this.authKey
                 }
@@ -44,7 +45,7 @@ export const player = defineStore("player", {
         async refreshLands() {
             const configuration = {
                 method: 'GET',
-                url: 'http://localhost:5000/api/lands',
+                url: 'http://localhost:3000/api/lands',
                 headers: {
                     'Authorization': 'Bearer ' + this.authKey
                 }
@@ -58,7 +59,7 @@ export const player = defineStore("player", {
         async createPlayer(username, password) {
             const configuration = {
                 method: 'POST',
-                url: 'http://localhost:5000/api/players',
+                url: 'http://localhost:3000/api/players',
                 data: {
                     username: username,
                     password: password
@@ -83,7 +84,7 @@ export const player = defineStore("player", {
 
             const configuration = {
                 method: 'POST',
-                url: 'http://localhost:5000/api/players/login',
+                url: 'http://localhost:3000/api/players/login',
                 data: {
                     username: username,
                     password: password
@@ -94,14 +95,19 @@ export const player = defineStore("player", {
                 .then(res => {
                     this.authKey = res.data.auth_key;
 
-                    // Open cookie for authKey
-                    const name = 'authKey';
-                    const value = this.authKey;
-                    const hours = 4;
-                    const date = new Date();
-                    date.setTime(date.getTime() + (hours*60*60*1000));
-                    const expires = "; expires=" + date.toUTCString();
-                    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+                    if (res.data.admin) {
+                        this.admin = true;
+                    } else {
+                        // Open cookie for authKey
+                        const name = 'authKey';
+                        const value = this.authKey;
+                        const hours = 4;
+                        const date = new Date();
+                        date.setTime(date.getTime() + (hours*60*60*1000));
+                        const expires = "; expires=" + date.toUTCString();
+                        document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+                        this.admin = false;
+                    }
 
                     return null;
                 })
@@ -116,7 +122,7 @@ export const player = defineStore("player", {
         async getLandsId() {
             const configuration = {
                 method: 'GET',
-                url: 'http://localhost:5000/api/lands',
+                url: 'http://localhost:3000/api/lands',
                 headers: {
                     'Authorization': 'Bearer ' + this.authKey
                 }

@@ -12,7 +12,7 @@ export const land = defineStore("land", {
         async getLandInfo(firstLandId, authKey) {
             const configuration = {
                 method: 'GET',
-                url: 'http://localhost:5000/api/lands/' + firstLandId,
+                url: 'http://localhost:3000/api/lands/' + firstLandId,
                 headers: {
                     'Authorization': 'Bearer ' + authKey
                 }
@@ -29,7 +29,7 @@ export const land = defineStore("land", {
         async updateResource(nField, authKey) {
             const configuration = {
                 method: 'POST',
-                url: 'http://localhost:5000/api/lands/resource',
+                url: 'http://localhost:3000/api/lands/resource',
                 data: {
                     'landId': this.landData._id,
                     'nField': nField
@@ -58,7 +58,7 @@ export const land = defineStore("land", {
         async refreshLand(authKey) {
             const configuration = {
                 method: 'GET',
-                url: 'http://localhost:5000/api/lands/' + this.landData._id,
+                url: 'http://localhost:3000/api/lands/' + this.landData._id,
                 headers: {
                     'Authorization': 'Bearer ' + authKey
                 }
@@ -75,7 +75,7 @@ export const land = defineStore("land", {
         async build(buildingId, nField, authKey) {
             const configuration = {
                 method: 'POST',
-                url: 'http://localhost:5000/api/lands/building',
+                url: 'http://localhost:3000/api/lands/building',
                 data: {
                     'landId': this.landData._id,
                     'buildingId': buildingId,
@@ -105,7 +105,7 @@ export const land = defineStore("land", {
         async upgradeBuilding(nField, buildingId, authKey) {
             const configuration = {
                 method: 'POST',
-                url: 'http://localhost:5000/api/lands/building',
+                url: 'http://localhost:3000/api/lands/building',
                 data: {
                     'landId': this.landData._id,
                     'buildingId': buildingId,
@@ -135,7 +135,7 @@ export const land = defineStore("land", {
         async upgradePyramid(authKey) {
             const configuration = {
                 method: 'POST',
-                url: 'http://localhost:5000/api/lands/pyramid',
+                url: 'http://localhost:3000/api/lands/pyramid',
                 data: {
                     'landId': this.landData._id
                 },
@@ -163,7 +163,7 @@ export const land = defineStore("land", {
         async recruitTroops(authKey, troopId, quantity) {
             const configuration = {
                 method: 'POST',
-                url: 'http://localhost:5000/api/lands/troops',
+                url: 'http://localhost:3000/api/lands/troops',
                 data: {
                     'landId': this.landData._id,
                     'troopId': troopId,
@@ -190,14 +190,14 @@ export const land = defineStore("land", {
                     }
                 });
         },
-        async adventure(authKey, difficulty) {
+        async adventure(authKey, name) {
             const configuration = {
                 method: 'POST',
-                url: 'http://localhost:5000/api/lands/adventure',
+                url: 'http://localhost:3000/api/lands/adventure',
                 data: {
                     'landId': this.landData._id,
                     'troops': this.landData.troops,
-                    'difficulty': difficulty
+                    'name': name
                 },
                 headers: {
                     'Authorization': 'Bearer ' + authKey
@@ -223,7 +223,7 @@ export const land = defineStore("land", {
         async createLand(authKey) {
             const configuration = {
                 method: 'POST',
-                url: 'http://localhost:5000/api/lands',
+                url: 'http://localhost:3000/api/lands',
                 data: {
                     'landId': this.landData._id
                 },

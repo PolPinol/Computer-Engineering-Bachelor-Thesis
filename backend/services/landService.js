@@ -8,6 +8,10 @@ const playerDAO = require("../database/playerDAO");
 const data = require("../data/data");
 const mongo = require("mongodb");
 
+const getGamemaster = async () => {
+    return data.getGamemaster();
+}
+
 // Method that get all owned lands from a player and return them.
 const getLands = async (playerId) => {
     const query = await playerDAO.findOne(
@@ -217,10 +221,45 @@ const updateLand = async (land) => {
                     obj.type = field.type;
                     obj.quantity = 0;
                     land.resources.push(obj);
+                    console.log(field.type);
                 }
             }
         );
         land.productions = productions;
+
+        // New resource for land
+        for (const resData of data.getResources()) {
+            let found = false;
+            for (const res of land.resources) {
+                if (cmp(resData.resourceId, res.type)) {
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found) {
+                const obj = {};
+                obj.type = resData.resourceId;
+                obj.quantity = 0;
+                land.resources.push(obj);
+                land.productions.push({type: resData.resourceId, production: 0});
+            }
+        }
+
+        // No production for a resource, add 0
+        for (const res of land.resources) {
+            let found = false;
+            for (const prod of land.productions) {
+                if (cmp(res.type, prod.type)) {
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found) {
+                land.productions.push({type: res.type, production: 0});
+            }
+        }
 
         // UPDATE TIMES
         const event = land.eventsTime[i+1];
@@ -261,7 +300,13 @@ const updateLand = async (land) => {
             let succeed = true;
             const troopsData = data.getTroops();
             const adventureData = data.getAdventures();
-            const adventure = adventureData[event.difficulty - 1];
+            let adventure = {};
+            for (const adv of adventureData) {
+                if (adv.name === event.name) {
+                    adventure = adv;
+                    break;
+                }
+            }
 
             let life = adventure.life;
             let attack = adventure.attack;
@@ -304,11 +349,20 @@ const updateLand = async (land) => {
             if (succeed) {
                 // Get quantity
                 for (const resource of adventure.resources) {
+                    let found = false;
                     for (const res of land.resources) {
                         if (res.type === resource.type) {
                             res.quantity += resource.quantity;
+                            found = true;
                             break;
                         }
+                    }
+
+                    if (!found) {
+                        const obj = {};
+                        obj.type = resource.type;
+                        obj.quantity = resource.quantity;
+                        land.resources.push(obj);
                     }
                 }
 
@@ -741,7 +795,7 @@ const recruitTroops = async (land, troopId, quantity) => {
 
 // Method that checks if the land has sufficient troops to send the adventure selected and send it. This adventure
 // will be appended to the events array to be run when the time is passed.
-const adventure = async (land, troops, difficulty) => {
+const adventure = async (land, troops, name) => {
     // check for any troop
     let n = 0;
     for (const troop of troops) {
@@ -753,7 +807,13 @@ const adventure = async (land, troops, difficulty) => {
     if (n === 0) return false;
 
     const adventureData = data.getAdventures();
-    const adventure = adventureData[difficulty - 1];
+    let adventure = {};
+    for (const ad of adventureData) {
+        if (ad.name === name) {
+            adventure = ad;
+            break;
+        }
+    }
 
     // create event to adventure
     const eventObj = {};
@@ -774,7 +834,7 @@ const adventure = async (land, troops, difficulty) => {
     eventObj.time = time;
     eventObj.type = 'adventure';
     eventObj.troops = troops;
-    eventObj.difficulty = difficulty;
+    eventObj.name = name;
     eventObj.queue = 'Adventure \'' + adventure.name +  '\' is in progress.';
     eventObj.log = 'The adventure \'' + adventure.name +  '\' has been completed.';
 
@@ -899,6 +959,7 @@ const cmp = (str1, str2) => {
 }
 
 module.exports = {
+    getGamemaster,
     getLands,
     getLandInfo,
     isBuildingIdCorrect,
