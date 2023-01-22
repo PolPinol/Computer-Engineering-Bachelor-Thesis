@@ -18,12 +18,19 @@
 ![screenshot](https://i.imgur.com/YYb4ZGR.jpg)
 
 ## Versions
-### v1.0
+### v0.6
+* Add Admin Panel
+    - UI for adding new resource data
+    - UI for adding new troop data
+    - UI for adding new adventure data
+    - UI for adding new building data
+    - Visualizer of all data 
+
+### v0.5
 * Add global Ranking page
 * Add Timeline page
 * Upgrade usability in all the buttons
-* Upgrade  all graphics and images
-* Deploy the application
+* Upgrade all graphics and images
 
 ### v0.4
 * Implement source of truth and Vuejs Pinia
