@@ -6,7 +6,7 @@ from locust import HttpUser, task, between, tag
 
 
 class IntegrityTest(HttpUser):
-    host = "http://localhost:5000/api"
+    host = "http://localhost:3000/api"
 
     wait_time = between(1, 5)
 

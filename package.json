@@ -7,8 +7,8 @@
     "prestart": "rm -rf dist & cd frontend && npm run build && cd .. && mv ./frontend/dist ./dist",
     "start": "cd backend && rm -f gameMaster.json && cp gameMaster_real.json gameMaster.json && cd .. && nodemon index.js",
     "preinstall": "cd frontend && npm install && pip3 install locust",
-    "pretest": "cd backend && rm -f gameMaster.json && cp gameMaster_test.json gameMaster.json && cd .. && start nodemon index.js",
-    "test": "timeout 5 && cd testing && locust --tags %npm_config_tags% --headless --users 1 --spawn-rate 1 -H http://localhost:5000/api"
+    "pretest": "cd backend && rm -f gameMaster.json && cp gameMaster_test.json gameMaster.json && cd ..",
+    "test": "cd testing && locust --tags $npm_config_tags --headless --users 1 --spawn-rate 1 -H http://localhost:3000/api"
   },
   "keywords": [],
   "author": "Pol Piñol Castuera",
