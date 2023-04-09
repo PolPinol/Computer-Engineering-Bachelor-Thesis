@@ -18,12 +18,19 @@
 ![screenshot](https://i.imgur.com/YYb4ZGR.jpg)
 
 ## Versions
-### v1.0
+### v0.6
+* Add Admin Panel
+    - UI for adding new resource data
+    - UI for adding new troop data
+    - UI for adding new adventure data
+    - UI for adding new building data
+    - Visualizer of all data 
+
+### v0.5
 * Add global Ranking page
 * Add Timeline page
 * Upgrade usability in all the buttons
-* Upgrade  all graphics and images
-* Deploy the application
+* Upgrade all graphics and images
 
 ### v0.4
 * Implement source of truth and Vuejs Pinia
@@ -70,11 +77,11 @@ $ npm install
 # Run the app
 $ npm start
 
-# App will be run on http://localhost:5000
+# App will be run on http://localhost:3000
 ```
 
 > **Note**
-> All the scripts are prepared to be run using Windows.
+> All the scripts are prepared to be run using macOS Ventura 13.1.
 
 ## Testing
 ```bash
@@ -91,8 +98,7 @@ We have different tests to check all functionalities from the video game:
 
 
 ## Website
-
-You can play online on the website [Age of Ra](https://age-of-ra.herokuapp.com).
+In the future, you will have the possibility of playing online.
 
 
 > pol.pinolcastuera@gmail.com &nbsp;&middot;&nbsp;
