@@ -104,8 +104,3 @@ In the future, you will have the possibility of playing online.
 > pol.pinolcastuera@gmail.com &nbsp;&middot;&nbsp;
 > GitHub [@PolPinol](https://github.com/polpinol) &nbsp;&middot;&nbsp;
 > Linkedin [Pol Piñol Castuera](https://www.linkedin.com/in/polpinol/)
-
-
-
-
-
