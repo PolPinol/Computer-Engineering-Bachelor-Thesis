@@ -9,8 +9,8 @@ const DbConnection = function () {
 
     async function DbConnect() {
         try {
-            let url = 'mongodb+srv://tfg_username:12345678Aa@tfg.rki3q.mongodb.net/?retryWrites=true&w=majority';
-            return await MongoClient.connect(url);
+            let url = '';
+	    return await MongoClient.connect(url);
         } catch (e) {
             console.log('Error at connecting to mongo');
             return e;
